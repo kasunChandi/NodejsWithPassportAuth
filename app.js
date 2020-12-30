@@ -3,8 +3,15 @@ const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
+
 
 const app = express();
+
+// Passport Config
+require('./config/passport')(passport);
+
+
 const port = 5000;
 const indexpage = require("./route/indexpage")
 const users = require("./route/user")
@@ -25,6 +32,10 @@ app.use(
     })
   );
 
+  // Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Connect flash
 app.use(flash());
 
@@ -36,6 +47,9 @@ app.use(function(req, res, next) {
     res.locals.error = req.flash('error');
     next();
   });
+
+
+
 
 //Routes 
 app.use('/', indexpage);
