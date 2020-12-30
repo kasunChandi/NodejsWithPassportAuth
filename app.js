@@ -11,6 +11,11 @@ const users = require("./route/user")
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
+//Bodyparser
+app.use(express.urlencoded({extended: false}));
+
+
+
 //Routes 
 app.use('/', indexpage);
 app.use('/users', users);

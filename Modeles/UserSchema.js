@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+/* const mongoose = require('mongoose');
 
 const loginSchema = new mongoose.Schema({
 
@@ -16,4 +16,30 @@ const loginSchema = new mongoose.Schema({
 });
 const logingSchema = mongoose.model("login" , loginSchema);
 
-module.exports = logingSchema;
+module.exports = logingSchema; */
+
+
+const mongoose = require('mongoose');
+
+const UserSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+const User = mongoose.model('User', UserSchema);
+
+module.exports = User;
